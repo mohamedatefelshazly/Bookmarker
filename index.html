@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmarker</title>
+    <link rel="icon" href="images/favicon.png" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/indexStyle.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Pacifico&family=Righteous&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="p-5">
+        <h1 class="mx-auto position-relative">Bookmarker</h1>
+      </div>
+
+      <div class="d-flex flex-column row-gap-3 p-3">
+        <h2 class="text-center fs-5 fw-light">
+          <i class="fa-solid fa-bookmark"></i> Bookmark your favorite sites
+          <i class="fa-solid fa-bookmark"></i>
+        </h2>
+        <label for="websiteID"
+          ><i class="fa-solid fa-book-bookmark"></i> Site Name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="websiteID"
+          placeholder="Bookmark Name"
+          oninput="allValidate(this,'websiteID')"
+        />
+        <label for="urlID"><i class="fa-solid fa-link"></i> Site URL</label>
+        <input
+          type="text"
+          class="form-control"
+          id="urlID"
+          placeholder="Website URL"
+          oninput="allValidate(this,'urlID')"
+        />
+        <button
+          onclick="saveBookmark()"
+          class="form-control bg-danger text-white w-25 mx-auto"
+        >
+          Submit
+        </button>
+      </div>
+      <table class="w-100 my-5 text-center bg-white">
+        <thead class="fw-bold">
+          <td>index</td>
+          <td>Website Name</td>
+          <td>Visit</td>
+          <td>Delete</td>
+        </thead>
+        <tbody id="bookmarkListId"></tbody>
+      </table>
+    </div>
+
+    <script src="JS/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="JS/main.js"></script>
+  </body>
+</html>
