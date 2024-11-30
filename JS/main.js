@@ -9,6 +9,7 @@ var bookmarks = [
   },
 ];
 var valid = false;
+var repeated = false;
 
 if (localStorage.getItem("bookmark") != null) {
   bookmarks = JSON.parse(localStorage.getItem("bookmark"));
@@ -24,10 +25,34 @@ function saveBookmark() {
       websitename: document.getElementById("websiteID").value,
       siteurl: document.getElementById("urlID").value,
     };
-    bookmarks.push(bookmark);
-    localStorage.setItem("bookmark", JSON.stringify(bookmarks));
-    displayBookmarks();
-    clearinput();
+    if (repeated) {
+      Swal.fire({
+        title: `
+        <div class="d-flex d-inline ms-0 border-0">
+          <i class="fa fa-circle text-danger"></i>
+          <i class="fa fa-circle mx-2 text-warning"></i>
+          <i class="fa fa-circle text-success"></i>
+          <i class="fa fa-x text-body ms-auto btn" onclick="close1()" ></i>
+        </div>
+      <div class="text-black fs-6 border-0">
+        <p class="fw-bold text-start">
+          Site Name and Url is repeated </p>
+      </div>
+        `,
+        width: 500,
+        padding: "0.5em",
+        color: "rgb(0,0,0)",
+        background: "#fff",
+        backdrop: `
+          rgba(0,0,0,0.5)
+        `,
+      });
+    } else {
+      bookmarks.push(bookmark);
+      localStorage.setItem("bookmark", JSON.stringify(bookmarks));
+      displayBookmarks();
+      clearinput();
+    }
   } else {
     Swal.fire({
       title: `
@@ -93,6 +118,12 @@ function allValidate(element, elementId) {
     document.getElementById(elementId).classList.remove("is-invalid");
     document.getElementById(elementId).classList.add("is-valid");
     valid = true;
+    for (item of bookmarks) {
+      if (item.websitename == element.value || item.siteurl == element.value) {
+        repeated = true;
+        break;
+      }
+    }
   } else {
     document.getElementById(elementId).classList.remove("is-valid");
     document.getElementById(elementId).classList.add("is-invalid");
